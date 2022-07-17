@@ -5,18 +5,15 @@
   </head>
 
   <body>
-    <script>
-      let start_counter = 0
-    </script>
-
     <label for="text1">カウンター：</label>
     <input type="text" value=0 id="text1" maxlength="5" />
     <input type="button" value="カウント" onclick="clickBtnAdd()" />
 
     <script>
+      let startCounterValue = 0
       function clickBtnAdd() {
-        const counter = ++start_counter
-        document.getElementById("text1").value = counter;
+        const viewCounter = ++startCounterValue
+        document.getElementById("text1").value = viewCounter;
       }
     </script>
   </body>
