@@ -8,11 +8,15 @@
     <label for="text1">カウンター：</label>
     <input type="text" value=0 id="text1" maxlength="5" />
     <input type="button" value="カウント" onclick="clickBtnAdd()" />
+    <input type="button" value="リセット" onclick="clickBtnReset()" />
 
     <script>
-      let startCounterValue = 0
+      let viewCounter = 0
       function clickBtnAdd() {
-        const viewCounter = ++startCounterValue
+        document.getElementById("text1").value = ++viewCounter;
+      }
+      function clickBtnReset() {
+        viewCounter = 0
         document.getElementById("text1").value = viewCounter;
       }
     </script>
