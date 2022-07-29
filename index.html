@@ -18,13 +18,15 @@
   </head>
 
   <body>
-    <label for="counter">カウンター：</label>
-    <input type="text" value=00000  id="counter" maxlength="5" class="class_A"/>
-    <div class="class_B">
-      <input type="button" value="カウント" style="color:#ffffff;background-color:#0000ff;" onclick="clickBtnAdd()" />
-      <input type="button" value="リセット" style="color:darkred;background-color:sandybrown;" onclick="clickBtnReset()" />
-    </div>
-
+    <form name="formText">
+      <label for="counter">カウンター：</label>
+      <input type="text" value=00000  name="counter" id="counter" maxlength="5" class="class_A"/>
+      <div class="class_B">
+        <input type="button" value="カウント" style="color:#ffffff;background-color:#0000ff;" onclick="clickBtnAdd()" />
+        <input type="button" value="リセット" style="color:darkred;background-color:sandybrown;" onclick="clickBtnReset()" />
+        <input type="button" value="保存"  onclick="clickBtnSave()" />
+      </div>
+    </form>
     <script>
       let viewCounter = 0
       //  カウンタに1加算する
@@ -41,14 +43,17 @@
         var addZeros = "";
         //  対象の桁数を得る。lengthは数値に無効であるため、あらかじめ文字に変換する
         var targetFigure = (String(targetNum).length)
-        console.log("a=",targetNum);
-        console.log("b=",targetFigure);
         // 先頭に加える文字列(0など)を作成
         for( var i=0 ; i < (setFigure - targetFigure)  ; i++ ) {
           addZeros += setChar;
         }
         // 文字列を合成して返す
         return (addZeros + targetNum);
+      }
+      // カウンターの値を書き込む
+      function clickBtnSave(){
+        google.script.run
+          .writeSheet(document.forms['formText'].elements['counter'].value);
       }
     </script>
   </body>
