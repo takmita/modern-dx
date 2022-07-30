@@ -4,7 +4,7 @@ function doGet() {
 
 function writeSheet(e) {
     var ss = openSheet();
-    ss.getRange("A1").setValue([e])
+    ss.getRange("A1").setValue(e)
 }
 
 function openSheet() {
