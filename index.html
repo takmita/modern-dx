@@ -18,15 +18,13 @@
   </head>
 
   <body>
-    <form name="formText">
-      <label for="counter">カウンター：</label>
-      <input type="text" value=00000  name="counter" id="counter" maxlength="5" class="class_A"/>
-      <div class="class_B">
-        <input type="button" value="カウント" style="color:#ffffff;background-color:#0000ff;" onclick="clickBtnAdd()" />
-        <input type="button" value="リセット" style="color:darkred;background-color:sandybrown;" onclick="clickBtnReset()" />
-        <input type="button" value="保存"  onclick="clickBtnSave()" />
-      </div>
-    </form>
+    <label for="counter">カウンター：</label>
+    <input type="text" value=00000  id="counter" maxlength="5" class="class_A"/>
+    <div class="class_B">
+      <input type="button" value="カウント" style="color:#ffffff;background-color:#0000ff;" onclick="clickBtnAdd()" />
+      <input type="button" value="リセット" style="color:darkred;background-color:sandybrown;" onclick="clickBtnReset()" />
+      <input type="button" value="保存"  onclick="clickBtnSave()" />
+    </div>
     <script>
       let viewCounter = 0
       //  カウンタに1加算する
@@ -53,7 +51,7 @@
       // カウンターの値を書き込む
       function clickBtnSave(){
         google.script.run
-          .writeSheet(document.forms['formText'].elements['counter'].value);
+          .writeSheet(document.getElementById("counter").value);
       }
     </script>
   </body>
