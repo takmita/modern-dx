@@ -4,10 +4,11 @@
     <base target="_top">
     <style>
       .class_A {
-         width: 60px;
+         width: 90px;
          height:30px;
          text-align:right;
-         font: size xx-large;;
+         font-size:xx-large;
+         color: darkgreen;
       }
       .class_B {
         margin: 0px;
@@ -18,20 +19,39 @@
 
   <body>
     <label for="counter">カウンター：</label>
-    <input type="text" value=0  id="counter" maxlength="5" class="class_A"/>
+    <input type="text" value=00000  id="counter" maxlength="5" class="class_A"/>
     <div class="class_B">
       <input type="button" value="カウント" style="color:#ffffff;background-color:#0000ff;" onclick="clickBtnAdd()" />
       <input type="button" value="リセット" style="color:darkred;background-color:sandybrown;" onclick="clickBtnReset()" />
+      <input type="button" value="保存"  onclick="clickBtnSave()" />
     </div>
-
     <script>
-      let viewCounter = 0
+      //  カウンタに1加算する
       function clickBtnAdd() {
-        document.getElementById("counter").value = ++viewCounter;
+        let element = document.getElementById("counter");
+        let viewCounter = addChars(++element.value,5,0);
+        element.value = viewCounter;
       }
+      //  カウンタをゼロに戻す
       function clickBtnReset() {
-        viewCounter = 0
-        document.getElementById("counter").value = viewCounter;
+        document.getElementById("counter").value = "00000";
+      }
+      //  カウンタの頭をゼロ埋めする
+      function addChars( targetNum, setFigure, setChar ) {
+        var addZeros = "";
+        //  対象の桁数を得る。lengthは数値に無効であるため、あらかじめ文字に変換する
+        var targetFigure = (String(targetNum).length)
+        // 先頭に加える文字列(0など)を作成
+        for( var i=0 ; i < (setFigure - targetFigure)  ; i++ ) {
+          addZeros += setChar;
+        }
+        // 文字列を合成して返す
+        return (addZeros + targetNum);
+      }
+      // カウンターの値を書き込む
+      function clickBtnSave(){
+        google.script.run
+          .writeSheet(document.getElementById("counter").value);
       }
     </script>
   </body>
