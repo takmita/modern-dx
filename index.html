@@ -26,15 +26,15 @@
       <input type="button" value="保存"  onclick="clickBtnSave()" />
     </div>
     <script>
-      let viewCounter = 0
       //  カウンタに1加算する
       function clickBtnAdd() {
-        document.getElementById("counter").value = addChars(++viewCounter,5,0);
+        let element = document.getElementById("counter");
+        let viewCounter = addChars(++element.value,5,0);
+        element.value = viewCounter;
       }
       //  カウンタをゼロに戻す
       function clickBtnReset() {
-        viewCounter = 0
-        document.getElementById("counter").value = addChars(viewCounter,5,0);
+        document.getElementById("counter").value = "00000";
       }
       //  カウンタの頭をゼロ埋めする
       function addChars( targetNum, setFigure, setChar ) {
