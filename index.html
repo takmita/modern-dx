@@ -8,10 +8,10 @@
   <body>
     <label for="counter">カウンター：</label>
     <input type="text" value=00000  id="counter" maxlength="5" class="class_A"/>
-    <div class="class_B">
-      <input type="button" value="カウント" style="color:#ffffff;background-color:#0000ff;" onclick="clickBtnAdd()" />
-      <input type="button" value="リセット" style="color:darkred;background-color:sandybrown;" onclick="clickBtnReset()" />
-      <input type="button" value="保存"  onclick="clickBtnSave()" />
+    <div class="class_btn">
+      <button onclick="clickBtnAdd()" class="class_btn_add">カウント</button>
+      <button onclick="clickBtnReset()" class="class_btn_rst">リセット</button>
+      <button onclick="clickBtnSave()">保存</button>
     </div>
     <script>
       //  カウンタに1加算する
