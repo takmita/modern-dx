@@ -7,7 +7,7 @@
 
   <body>
     <label for="counter">カウンター：</label>
-    <input type="text" value=00000  id="counter" maxlength="5" class="class_A"/>
+    <input type="text" value="00000"  id="counter" maxlength="5" class="class_A"/>
     <div class="class_btn">
       <button onclick="clickBtnAdd()" class="class_btn_add">カウント</button>
       <button onclick="clickBtnReset()" class="class_btn_rst">リセット</button>
@@ -16,25 +16,18 @@
     <script>
       //  カウンタに1加算する
       function clickBtnAdd() {
-        let element = document.getElementById("counter");
-        let viewCounter = addChars(++element.value,5,0);
-        element.value = viewCounter;
+        let counter = Number(document.getElementById("counter").value);
+        // counterは数値でないと正しく計算できないため、あらあじめ型変換している
+        counter += 1;
+        if (counter == 99999) {
+          counter = 1;
+        }
+        // 計算値の有効桁数は表示桁数より大きいのsliceで下5桁を切り出す
+        document.getElementById("counter").value = ("00000" + counter).slice(-5);
       }
       //  カウンタをゼロに戻す
       function clickBtnReset() {
         document.getElementById("counter").value = "00000";
-      }
-      //  カウンタの頭をゼロ埋めする
-      function addChars( targetNum, setFigure, setChar ) {
-        var addZeros = "";
-        //  対象の桁数を得る。lengthは数値に無効であるため、あらかじめ文字に変換する
-        var targetFigure = (String(targetNum).length)
-        // 先頭に加える文字列(0など)を作成
-        for( var i=0 ; i < (setFigure - targetFigure)  ; i++ ) {
-          addZeros += setChar;
-        }
-        // 文字列を合成して返す
-        return (addZeros + targetNum);
       }
       // カウンターの値を書き込む
       function clickBtnSave(){
