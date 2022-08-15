@@ -8,11 +8,12 @@
   <body>
     <label for="counter">カウンター：</label>
     <input type="text" value="00000"  id="counter" maxlength="5" class="class_A"/>
-    <div class="class_btn">
+    <p class="class_btn">  
       <button onclick="clickBtnAdd()" class="class_btn_add">カウント</button>
       <button onclick="clickBtnReset()" class="class_btn_rst">リセット</button>
       <button onclick="clickBtnSave()">保存</button>
-    </div>
+      <button onclick="clickBtnShow()" class="class_btn_show">表示</button>
+    </p>
     <script>
       //  カウンタに1加算する
       function clickBtnAdd() {
@@ -22,8 +23,8 @@
         if (counter == 99999) {
           counter = 1;
         }
-        // 計算値の有効桁数は表示桁数より大きいのsliceで下5桁を切り出す
-        document.getElementById("counter").value = ("00000" + counter).slice(-5);
+        // セロ詰めのため"0000"を頭に結合。表示桁数に合せるためsliceで下5桁を切り出す
+        document.getElementById("counter").value = ("0000" + counter).slice(-5);
       }
       //  カウンタをゼロに戻す
       function clickBtnReset() {
@@ -33,6 +34,16 @@
       function clickBtnSave(){
         google.script.run
           .writeSheet(document.getElementById("counter").value);
+      }
+      // 書き込まれたカウンターの値を表示する
+      function clickBtnShow(){ 
+        google.script.run
+        // 関数(readSheet)の戻り値は"withSuccessHandler"で受け取る
+          .withSuccessHandler(function(counter){
+        // セロ詰めのため"0000"を頭に結合。表示桁数に合せるためsliceで下5桁を切り出す
+          document.getElementById("counter").value = ("0000" + counter).slice(-5);
+          })
+          .readSheet();        
       }
     </script>
   </body>
