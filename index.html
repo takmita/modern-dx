@@ -2,36 +2,37 @@
 <html>
   <head>
     <base target="_top">
-    <style>
-      .class_A {
-         width: 60px;
-         height:30px;
-         text-align:right;
-         font: size xx-large;;
-      }
-      .class_B {
-        margin: 0px;
-        padding: 10px 100px;
-      }
-    </style>
+    <?!= HtmlService.createHtmlOutputFromFile('css').getContent(); ?>
   </head>
 
   <body>
     <label for="counter">カウンター：</label>
-    <input type="text" value=0  id="counter" maxlength="5" class="class_A"/>
-    <div class="class_B">
-      <input type="button" value="カウント" style="color:#ffffff;background-color:#0000ff;" onclick="clickBtnAdd()" />
-      <input type="button" value="リセット" style="color:darkred;background-color:sandybrown;" onclick="clickBtnReset()" />
+    <input type="text" value="00000"  id="counter" maxlength="5" class="class_A"/>
+    <div class="class_btn">
+      <button onclick="clickBtnAdd()" class="class_btn_add">カウント</button>
+      <button onclick="clickBtnReset()" class="class_btn_rst">リセット</button>
+      <button onclick="clickBtnSave()">保存</button>
     </div>
-
     <script>
-      let viewCounter = 0
+      //  カウンタに1加算する
       function clickBtnAdd() {
-        document.getElementById("counter").value = ++viewCounter;
+        let counter = Number(document.getElementById("counter").value);
+        // counterは数値でないと正しく計算できないため、あらあじめ型変換している
+        counter += 1;
+        if (counter == 99999) {
+          counter = 1;
+        }
+        // 計算値の有効桁数は表示桁数より大きいのsliceで下5桁を切り出す
+        document.getElementById("counter").value = ("00000" + counter).slice(-5);
       }
+      //  カウンタをゼロに戻す
       function clickBtnReset() {
-        viewCounter = 0
-        document.getElementById("counter").value = viewCounter;
+        document.getElementById("counter").value = "00000";
+      }
+      // カウンターの値を書き込む
+      function clickBtnSave(){
+        google.script.run
+          .writeSheet(document.getElementById("counter").value);
       }
     </script>
   </body>
