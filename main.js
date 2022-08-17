@@ -12,3 +12,9 @@ function openSheet() {
     var ss = SpreadsheetApp.openById(id).getSheetByName("シート1");
     return ss;
 }
+
+function readSheet() {
+    var ss = openSheet();
+    var data = ss.getRange("A1").getValue();
+    return data;
+}
