@@ -1,0 +1,27 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script>
+  google.script.run.withSuccessHandler(counterShow).readSheet();
+  function counterShow(ssCounter){
+    new Vue({
+      el: '#app',
+      data: {
+        counter: ("0000" + ssCounter).slice(-5)
+      },
+      methods: {
+        addCounter() {
+          let resoult = ++this.counter ;
+          if (resoult == 99999)  {
+            resoult = 1;
+          }
+          this.counter = ("0000" + resoult).slice(-5);
+        },
+        resetCounter() {
+          this.counter = "00000";
+        },
+        saveCounter() {
+          google.script.run.writeSheet(this.counter);
+        },
+      },
+    });
+  };
+</script>
