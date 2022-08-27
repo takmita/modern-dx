@@ -6,13 +6,11 @@ new Vue({
     counter: ""
   },
   mounted : function(){
-    let resoult = "";
     google.script.run.withSuccessHandler(function(ssCounter) {
       console.log("ssCounter ",ssCounter);
-      resoult = ssCounter;
+      this.counter = ssCounter;
     }).readSheet();
-    console.log("resoult ",resoult);
-    this.counter = resoult;
+    // this.counter = "77777";
   },
   methods: {
     addCounter() {
