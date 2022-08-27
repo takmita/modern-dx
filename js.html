@@ -1,27 +1,33 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script>
-  google.script.run.withSuccessHandler(counterShow).readSheet();
-  function counterShow(ssCounter){
-    new Vue({
-      el: '#app',
-      data: {
-        counter: ("0000" + ssCounter).slice(-5)
-      },
-      methods: {
-        addCounter() {
-          let resoult = ++this.counter ;
-          if (resoult == 99999)  {
-            resoult = 1;
-          }
-          this.counter = ("0000" + resoult).slice(-5);
-        },
-        resetCounter() {
-          this.counter = "00000";
-        },
-        saveCounter() {
-          google.script.run.writeSheet(this.counter);
-        },
-      },
-    });
-  };
+new Vue({
+  el: '#app',
+  data: {
+    counter: ""
+  },
+  mounted : function(){
+    let resoult = "";
+    google.script.run.withSuccessHandler(function(ssCounter) {
+      console.log("ssCounter ",ssCounter);
+      resoult = ssCounter;
+    }).readSheet();
+    console.log("resoult ",resoult);
+    this.counter = resoult;
+  },
+  methods: {
+    addCounter() {
+      let resoult = ++this.counter ;
+      if (resoult == 99999)  {
+        resoult = 1;
+      }
+      this.counter = ("0000" + resoult).slice(-5);
+    },
+    resetCounter(defalt) {
+      this.counter = ("0000" + defalt).slice(-5);
+    },
+    saveCounter() {
+      google.script.run.writeSheet(this.counter);
+    },
+  },
+});
 </script>

@@ -1,6 +1,5 @@
 function doGet() {
   return HtmlService.createTemplateFromFile("index").evaluate();
-
 }
 function writeSheet(e) {
   var ss = openSheet();

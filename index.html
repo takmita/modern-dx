@@ -7,10 +7,10 @@
   <body>
     <div id="app">
       <label for="counter">カウンター：</label>
-      <input type="text" v-model.number="counter" maxlength="5" class="class_A"/>
+      <input type="text" v-model="counter" class="class_A" maxlength="5"/>
       <p class="class_btn">        
         <button @click="addCounter" class="class_btn_add">カウント</button>
-        <button @click="resetCounter" class="class_btn_rst">リセット</button>
+        <button @click="resetCounter(0)" class="class_btn_rst">リセット</button>
         <button @click="saveCounter">保存</button>
       </p>
     </div>
