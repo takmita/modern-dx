@@ -1,0 +1,27 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    counter: ""
+  },
+  mounted : function(){
+    google.script.run.withSuccessHandler(this.resetCounter).readSheet();
+  },
+  methods: {
+    addCounter() {
+      let resoult = ++this.counter ;
+      if (resoult == 99999)  {
+        resoult = 1;
+      }
+      this.counter = ("0000" + resoult).slice(-5);
+    },
+    resetCounter(defalt) {
+      this.counter = ("0000" + defalt).slice(-5);
+    },
+    saveCounter() {
+      google.script.run.writeSheet(this.counter);
+    },
+  },
+});
+</script>

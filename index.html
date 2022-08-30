@@ -4,52 +4,16 @@
     <base target="_top">
     <?!= HtmlService.createHtmlOutputFromFile('css').getContent(); ?>
   </head>
-
   <body>
-    <label for="counter">カウンター：</label>
-    <input type="text" value=""  id="counter" maxlength="5" class="class_A"/>
-    <p class="class_btn">  
-      <button onclick="clickBtnAdd()" class="class_btn_add">カウント</button>
-      <button onclick="clickBtnReset()" class="class_btn_rst">リセット</button>
-      <button onclick="clickBtnSave()">保存</button>
-      <!-- <button onclick="clickBtnShow()" class="class_btn_show">表示</button> -->
-    </p>
-    <script>
-      // スプレッドシートに書き込まれたカウンタの値を取り出し表示する
-      counterShow();
-      // カウンタに1加算する
-      function clickBtnAdd() {
-        let counter = Number(document.getElementById("counter").value);
-        // counterは数値でないと正しく計算できないため、あらあじめ型変換している
-        counter += 1;
-        if (counter == 99999) {
-          counter = 1;
-        }
-        // セロ詰めのため"0000"を頭に結合。表示桁数に合せるためsliceで下5桁を切り出す
-        document.getElementById("counter").value = ("0000" + counter).slice(-5);
-      }
-      //  カウンタをゼロに戻す
-      function clickBtnReset() {
-        document.getElementById("counter").value = "00000";
-      }
-      // カウンターの値を書き込む
-      function clickBtnSave(){
-        google.script.run
-          .writeSheet(document.getElementById("counter").value);
-      }
-      // 書き込まれたカウンターの値を表示する
-      function counterShow(){ 
-        // readSheet(gs関数)を実行する。その結果が、
-        // OKなら返値をインプットボックス(countetr)に出力
-        // NGなら"00000"を出力
-        google.script.run.withSuccessHandler(function(counter){
-          if  (counter){
-            document.getElementById("counter").value = ("0000" + counter).slice(-5);  
-          } else {
-            document.getElementById("counter").value = "00000";
-          }
-        }).readSheet();        
-      }
-    </script>
+    <div id="app">
+      <label for="counter">カウンター：</label>
+      <input type="text" v-model="counter" class="class_A" maxlength="5"/>
+      <p class="class_btn">        
+        <button @click="addCounter" class="class_btn_add">カウント</button>
+        <button @click="resetCounter(0)" class="class_btn_rst">リセット</button>
+        <button @click="saveCounter">保存</button>
+      </p>
+    </div>
+    <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>
   </body>
 </html>
