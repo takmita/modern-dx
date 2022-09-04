@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <!-- <?!= HtmlService.createHtmlOutputFromFile('css').getContent(); ?> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <label for="counter">カウンター：</label> -->
+      <!-- <input type="text" v-model="counter" class="class_A" maxlength="5"/> -->
+      <v-form>
+        <v-container>
+          <v-text-field
+            v-model="counter"
+            :rules="rules.name"
+            color="blue darken-2"
+            label="Last name"
+            required
+          ></v-text-field>
+        </v-container>
+      </v-form>
+      <p class="class_btn">        
+        <button @click="addCounter" class="class_btn_add">カウント</button>
+        <button @click="resetCounter(0)" class="class_btn_rst">リセット</button>
+        <button @click="saveCounter">保存</button>
+      </p>
+    </div>
+    <style>
+      .container {
+        width: 300px;
+      }
+
+      .left-input input {
+        text-align: left;
+      }
+
+      .center-input input {
+        text-align: center;
+      }
+
+      .right-input input {
+        text-align: right;
+      }
+    </style>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>    
+  <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>
+</html>
