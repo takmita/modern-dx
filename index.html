@@ -21,9 +21,9 @@
             <v-text-field class="centered-input"
               solo
               rounded
-              placeholder="00000"
               color="green darken-5"
               maxlength="5"
+              ref="counter" v-model="counter"
             ></v-text-field>
             <p class="text-center">
               <v-btn
@@ -32,11 +32,13 @@
                 color="yellow"
               >カウント</v-btn>
               <v-btn
+                @click="resetCounter(0)"
                 rounded
                 color="red"
                 dark
               >リセット</v-btn>
               <v-btn
+                @click="saveCounter"
                 rounded
                 color="blue"
               >保存</v-btn>
@@ -53,23 +55,23 @@
   <script>
     new Vue({
       el: '#app',
-      data: {
+      data: () => ({
         counter: ""
-      },
+      }),
       vuetify: new Vuetify(),
       mounted : function(){
         google.script.run.withSuccessHandler(this.resetCounter).readSheet();
       },
       methods: {
+        resetCounter(defalt) {
+          this.counter = ("0000" + defalt).slice(-5);
+        },
         addCounter() {
           let resoult = ++this.counter ;
           if (resoult == 99999)  {
             resoult = 1;
           }
           this.counter = ("0000" + resoult).slice(-5);
-        },
-        resetCounter(defalt) {
-          this.counter = ("0000" + defalt).slice(-5);
         },
         saveCounter() {
           google.script.run.writeSheet(this.counter);
