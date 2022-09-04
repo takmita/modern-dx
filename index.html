@@ -23,24 +23,27 @@
               rounded
               color="green darken-5"
               maxlength="5"
-              ref="counter" v-model="counter"
+              v-bind:value="counter"
             ></v-text-field>
             <p class="text-center">
               <v-btn
                 @click="addCounter"
                 rounded
                 color="yellow"
+                width="100"
               >カウント</v-btn>
               <v-btn
                 @click="resetCounter(0)"
                 rounded
                 color="red"
                 dark
+                width="100"
               >リセット</v-btn>
               <v-btn
                 @click="saveCounter"
                 rounded
                 color="blue"
+                width="100"
               >保存</v-btn>
             </p>
           </v-col> 
