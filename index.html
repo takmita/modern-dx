@@ -5,6 +5,7 @@
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <?!= HtmlService.createHtmlOutputFromFile('css').getContent(); ?>
 </head>
 <body>
   <div id="app">
@@ -52,44 +53,7 @@
       </v-main>
     </v-app>
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-  <script>
-    new Vue({
-      el: '#app',
-      data: () => ({
-        counter: ""
-      }),
-      vuetify: new Vuetify(),
-      mounted : function(){
-        google.script.run.withSuccessHandler(this.resetCounter).readSheet();
-      },
-      methods: {
-        resetCounter(defalt) {
-          this.counter = ("0000" + defalt).slice(-5);
-        },
-        addCounter() {
-          let resoult = ++this.counter ;
-          if (resoult == 99999)  {
-            resoult = 1;
-          }
-          this.counter = ("0000" + resoult).slice(-5);
-        },
-        saveCounter() {
-          google.script.run.writeSheet(this.counter);
-        },
-      },
-    });
-  </script>    
-  <style>
-    .container {
-      width: 300px;
-    }
-    .centered-input input {
-      text-align: center;
-      font-size: xx-large;
-    }
-  </style>
+  <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>    
 </body>
 </html>
