@@ -14,11 +14,11 @@
         this.counter = ("0000" + defalt).slice(-5);
       },
       addCounter() {
-        let resoult = ++this.counter ;
-        if (resoult == 99999)  {
-          resoult = 1;
+        let result = ++this.counter ;
+        if (result == 99999)  {
+          result = 1;
         }
-        this.counter = ("0000" + resoult).slice(-5);
+        this.counter = ("0000" + result).slice(-5);
       },
       saveCounter() {
         google.script.run.writeSheet(this.counter);
