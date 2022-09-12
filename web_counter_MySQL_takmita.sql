@@ -1,5 +1,5 @@
 -- Project Name : ESM-GCP-STUDY
--- Date/Time    : 2022/09/11 12:59:22
+-- Date/Time    : 2022/09/12 20:00:42
 -- Author       : mitamurat
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -12,14 +12,14 @@
   この機能は A5:SQL Mk-2でのみ有効であることに注意してください。
 */
 
--- 
+-- web_counter_takmita
 --* RestoreFromTempTable
-create table NEW_ENTITY1 (
+create table web_counter_takmita (
   counter INT not null comment 'counter:更新用カウンター'
-) ;
+) comment 'web_counter_takmita' ;
 
-create unique index NEW_ENTITY1_PKI
-  on NEW_ENTITY1(counter);
+create unique index web_counter_takmita_PKI
+  on web_counter_takmita(counter);
 
-alter table NEW_ENTITY1
-  add constraint NEW_ENTITY1_PKC primary key (counter);
+alter table web_counter_takmita
+  add constraint web_counter_takmita_PKC primary key (counter);
