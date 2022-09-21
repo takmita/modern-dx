@@ -1,19 +1,38 @@
 function doGet() {
   return HtmlService.createTemplateFromFile("index").evaluate();
 }
-function writeSheet(e) {
-  var ss = openSheet();
-  ss.getRange("A1").setValue(e)
+
+/**
+ * Write one row of data to a table.
+ */
+const connectionName = 'esm-gcp-study:us-central1:modern-study'; //Instance_connection_name
+const userName = 'esm'; //user_name
+const password = 'esm'; //'user_password'
+const databaseName = 'web_counter_takmita'; //database_name
+ 
+const url = 'jdbc:google:mysql://' + connectionName + '/' + databaseName;
+ 
+function updateOneRecord(e) {
+  const connection = Jdbc.getCloudSqlConnection(url, userName, password);
+ 
+  const statement = connection.prepareStatement('UPDATE web_counter_takmita SET counter=?');
+  statement.setString(1, e);
+  
+  const row = statement.executeUpdate();
+  Logger.log(row);
+
+  statement.close();
+  connection.close();
 }
 
 function openSheet() {
-  var id = "1hSnXqpaT9qjTz5FWFWtez0TuGVQcSywFhHz8KtYiaYo";
-  var ss = SpreadsheetApp.openById(id).getSheetByName("シート1");
+  const id = "1hSnXqpaT9qjTz5FWFWtez0TuGVQcSywFhHz8KtYiaYo";
+  const ss = SpreadsheetApp.openById(id).getSheetByName("シート1");
   return ss;
 }
 
 function readSheet() {
-  var ss = openSheet();
-  var data = ss.getRange("A1").getValue();
+  const ss = openSheet();
+  const data = ss.getRange("A1").getValue();
   return data;
 }
