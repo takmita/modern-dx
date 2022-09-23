@@ -17,9 +17,7 @@ function updateOneRecord(e) {
  
   const statement = connection.prepareStatement('UPDATE web_counter_takmita SET counter=?');
   statement.setString(1, e);
-  
-  const row = statement.executeUpdate();
-  Logger.log(row);
+  statement.executeUpdate();
 
   statement.close();
   connection.close();
