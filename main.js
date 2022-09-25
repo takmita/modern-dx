@@ -7,16 +7,16 @@ function doGet() {
  */
 
 function updateOneRecord(updateCountr) {
-  const connectionName = 'esm-gcp-study:us-central1:modern-study'; //Instance_connection_name
-  const userName = 'esm'; //user_name
-  const password = 'esm'; //'user_password'
-  const databaseName = 'web_counter_takmita'; //database_name
+  const CONECTION_NAME = 'esm-gcp-study:us-central1:modern-study'; //Instance_connection_name
+  const USER_NAME = 'esm'; //user_name
+  const PASSWORD = 'esm'; //'user_password'
+  const DATABASE_NAME = 'web_counter_takmita'; //database_name
    
-  const url = 'jdbc:google:mysql://' + connectionName + '/' + databaseName;
-  const connection = Jdbc.getCloudSqlConnection(url, userName, password);
+  const URL = 'jdbc:google:mysql://' + CONECTION_NAME + '/' + DATABASE_NAME;
+  const connection = Jdbc.getCloudSqlConnection(URL, USER_NAME, PASSWORD);
  
-  const statement = connection.prepareStatement('UPDATE web_counter_takmita SET counter=?');
-  
+  let statement = connection.prepareStatement('UPDATE web_counter_takmita SET counter=?');
+
   statement.setString(1, updateCountr);
   statement.executeUpdate();
 
@@ -25,13 +25,13 @@ function updateOneRecord(updateCountr) {
 }
 
 function openSheet() {
-  const id = "1hSnXqpaT9qjTz5FWFWtez0TuGVQcSywFhHz8KtYiaYo";
-  const ss = SpreadsheetApp.openById(id).getSheetByName("シート1");
+  const ID = "1hSnXqpaT9qjTz5FWFWtez0TuGVQcSywFhHz8KtYiaYo";
+  let ss = SpreadsheetApp.openById(ID).getSheetByName("シート1");
   return ss;
 }
 
 function readSheet() {
-  const ss = openSheet();
-  const data = ss.getRange("A1").getValue();
+  let ss = openSheet();
+  let data = ss.getRange("A1").getValue();
   return data;
 }
