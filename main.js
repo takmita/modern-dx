@@ -12,11 +12,11 @@ const databaseName = 'web_counter_takmita'; //database_name
  
 const url = 'jdbc:google:mysql://' + connectionName + '/' + databaseName;
  
-function updateOneRecord(e) {
+function updateOneRecord(updateCountr) {
   const connection = Jdbc.getCloudSqlConnection(url, userName, password);
  
   const statement = connection.prepareStatement('UPDATE web_counter_takmita SET counter=?');
-  statement.setString(1, e);
+  statement.setString(1, updateCountr);
   statement.executeUpdate();
 
   statement.close();
