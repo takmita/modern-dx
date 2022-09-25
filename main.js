@@ -5,17 +5,18 @@ function doGet() {
 /**
  * Write one row of data to a table.
  */
-const connectionName = 'esm-gcp-study:us-central1:modern-study'; //Instance_connection_name
-const userName = 'esm'; //user_name
-const password = 'esm'; //'user_password'
-const databaseName = 'web_counter_takmita'; //database_name
- 
-const url = 'jdbc:google:mysql://' + connectionName + '/' + databaseName;
- 
+
 function updateOneRecord(updateCountr) {
+  const connectionName = 'esm-gcp-study:us-central1:modern-study'; //Instance_connection_name
+  const userName = 'esm'; //user_name
+  const password = 'esm'; //'user_password'
+  const databaseName = 'web_counter_takmita'; //database_name
+   
+  const url = 'jdbc:google:mysql://' + connectionName + '/' + databaseName;
   const connection = Jdbc.getCloudSqlConnection(url, userName, password);
  
   const statement = connection.prepareStatement('UPDATE web_counter_takmita SET counter=?');
+  
   statement.setString(1, updateCountr);
   statement.executeUpdate();
 
