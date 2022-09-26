@@ -5,8 +5,9 @@ function doGet() {
 const CONECTION_NAME = 'esm-gcp-study:us-central1:modern-study'; //Instance_connection_name
 const DATABASE_NAME = 'web_counter_takmita'; //database_name  
 const URL = 'jdbc:google:mysql://' + CONECTION_NAME + '/' + DATABASE_NAME;
+
 const USER_NAME = 'esm'; //user_name
-const PASSWORD = 'esm'; //'user_password'
+const PASSWORD = 'esm'; //user_password
 
 /**
  * Write one row of data to a table.
@@ -30,10 +31,10 @@ function readFromTable() {
   const statement = connection.createStatement();
   const results = statement.executeQuery('SELECT * FROM web_counter_takmita'); 
   
+  // テーブルに1件のみレコードがある前提
   while (results.next()) {
-    let counter = results.getInt('counter');
+    return results.getInt('counter');
   }
-  return this.counter;
 
   results.close();
   statement.close();
