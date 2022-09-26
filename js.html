@@ -21,7 +21,7 @@
         this.counter = ("0000" + result).slice(-5);
       },
       saveCounter() {
-        google.script.run.writeSheet(this.counter);
+        google.script.run.updateOneRecord(this.counter);
       },
     },
   });
