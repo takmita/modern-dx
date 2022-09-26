@@ -26,12 +26,12 @@ function updateOneRecord(updateCountr) {
 
 function openSheet() {
   const ID = "1hSnXqpaT9qjTz5FWFWtez0TuGVQcSywFhHz8KtYiaYo";
-  let ss = SpreadsheetApp.openById(ID).getSheetByName("シート1");
+  const ss = SpreadsheetApp.openById(ID).getSheetByName("シート1");
   return ss;
 }
 
 function readSheet() {
-  let ss = openSheet();
-  let data = ss.getRange("A1").getValue();
+  const ss = openSheet();
+  const data = ss.getRange("A1").getValue();
   return data;
 }
