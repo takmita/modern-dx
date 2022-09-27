@@ -14,7 +14,7 @@ const PASSWORD = 'esm'; //user_password
  */
 function updateOneRecord(updateCountr) {
   const connection = Jdbc.getCloudSqlConnection(URL, USER_NAME, PASSWORD);  
-  let statement = connection.prepareStatement('UPDATE web_counter_takmita SET counter=?');
+  const statement = connection.prepareStatement('UPDATE web_counter_takmita SET counter=?');
   
   statement.setString(1, updateCountr);
   statement.executeUpdate();
