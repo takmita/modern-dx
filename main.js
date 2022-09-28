@@ -33,10 +33,11 @@ function readFromTable() {
   
   // テーブルに1件のみレコードがある前提
   while (results.next()) {
-    return results.getInt('counter');
+    result = results.getInt('counter');
   }
 
   results.close();
   statement.close();
   connection.close();
+  return result;
 }
