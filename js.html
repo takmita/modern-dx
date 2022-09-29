@@ -7,7 +7,7 @@
     }),
     vuetify: new Vuetify(),
     mounted : function(){
-      google.script.run.withSuccessHandler(this.resetCounter).readSheet();
+      google.script.run.withSuccessHandler(this.resetCounter).readFromTable();
     },
     methods: {
       resetCounter(defalt) {
