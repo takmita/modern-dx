@@ -32,8 +32,9 @@ function readFromTable() {
   const results = statement.executeQuery('SELECT * FROM web_counter_takmita'); 
   
   // テーブルに1件のみレコードがある前提
+  let result
   while (results.next()) {
-    let result = results.getInt('counter');
+    result = results.getInt('counter');
   }
 
   results.close();
