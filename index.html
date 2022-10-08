@@ -25,7 +25,7 @@
                 v-bind:value="counter"
               ></v-text-field>
               <v-row>
-                <v-col>
+                <v-col v-show="showSwitch">
                   <v-btn
                     @click="addCounter"
                     rounded
@@ -54,6 +54,7 @@
     </v-app>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>    
 </body>
 </html>

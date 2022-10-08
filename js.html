@@ -1,13 +1,24 @@
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 <script>
   new Vue({
     el: '#app',
     data: () => ({
-      counter: ""
+      counter: "",
+      showSwitch :false,
     }),
     vuetify: new Vuetify(),
-    mounted : function(){
-      google.script.run.withSuccessHandler(this.resetCounter).readFromTable();
+    
+    // async mounted (){
+    //   await gasRun('readFromTable').then(function(dbValue){
+    mounted (){
+      gasRun('readFromTable').then(function(dbValue){
+        // readFromTable成功時
+        this.resetCounter(dbValue);
+        // ボタンを表示する
+        this.showSwitch = true;
+      }.bind(this)).catch(function(){
+        // エラー時
+        alert('カウンター取得失敗');
+      });
     },
     methods: {
       resetCounter(defalt) {
@@ -21,8 +32,24 @@
         this.counter = ("0000" + result).slice(-5);
       },
       saveCounter() {
-        google.script.run.updateOneRecord(this.counter);
+        gasRun('updateOneRecord',this.counter).then(function(){
+        // updateOneRecord成功時
+          alert('保存しました！');
+        }.bind(this)).catch(function(){
+        // エラー時
+          alert('保存失敗');
+        });
       },
     },
   });
+
+  function gasRun(func, ...args){
+    return new Promise(function(resolve, reject){
+      google.script.run.withSuccessHandler(function(dbValue){
+        resolve(dbValue);
+      }).withFailureHandler(function(){
+        reject();
+      })[func](...args);
+    });
+  }
 </script>
