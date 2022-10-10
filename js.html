@@ -3,22 +3,28 @@
     el: '#app',
     data: () => ({
       counter: "",
+      // ボタンは非表示で開始
       showSwitch :false,
+      // オーバーレイはローディング開始したら表示
+      overlay: false,
     }),
     vuetify: new Vuetify(),
-    
-    // async mounted (){
-    //   await gasRun('readFromTable').then(function(dbValue){
     mounted (){
+      // オーバーレイを表示する
+      this.overlay = true;
+      // ＤＢから値を取得する
       gasRun('readFromTable').then(function(dbValue){
         // readFromTable成功時
         this.resetCounter(dbValue);
-        // ボタンを表示する
+        // カウンターを表示したらボタンを表示する
         this.showSwitch = true;
       }.bind(this)).catch(function(){
         // エラー時
         alert('カウンター取得失敗');
-      });
+      }).finally(function(){
+        // オーバーレイを非表示に切り替える
+        this.overlay = false;
+      }.bind(this));
     },
     methods: {
       resetCounter(defalt) {
@@ -32,13 +38,18 @@
         this.counter = ("0000" + result).slice(-5);
       },
       saveCounter() {
+        // オーバーレイを表示する
+        this.overlay = true;
         gasRun('updateOneRecord',this.counter).then(function(){
         // updateOneRecord成功時
           alert('保存しました！');
         }.bind(this)).catch(function(){
         // エラー時
           alert('保存失敗');
-        });
+        }).finally(function(){
+          // オーバーレイを非表示に切り替える
+          this.overlay = false;
+        }.bind(this));
       },
     },
   });
