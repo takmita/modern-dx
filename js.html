@@ -9,22 +9,26 @@
       overlay: false,
     }),
     vuetify: new Vuetify(),
-    mounted (){
-      // オーバーレイを表示する
-      this.overlay = true;
-      // ＤＢから値を取得する
-      gasRun('readFromTable').then(function(dbValue){
-        // readFromTable成功時
+    async created (){
+      try {
+        // オーバーレイを表示する
+        this.overlay = true;
+        // ＤＢから値を取得する
+        const dbValue = await gasRun('readFromTable');
         this.resetCounter(dbValue);
+        // readFromTable成功時
         // カウンターを表示したらボタンを表示する
         this.showSwitch = true;
-      }.bind(this)).catch(function(){
+      }
+      catch(e) {
         // エラー時
+        console.log(e.message);
         alert('カウンター取得失敗');
-      }).finally(function(){
+      }
+      finally {
         // オーバーレイを非表示に切り替える
         this.overlay = false;
-      }.bind(this));
+      }
     },
     methods: {
       resetCounter(defalt) {
@@ -37,19 +41,21 @@
         }
         this.counter = ("0000" + result).slice(-5);
       },
-      saveCounter() {
-        // オーバーレイを表示する
-        this.overlay = true;
-        gasRun('updateOneRecord',this.counter).then(function(){
-        // updateOneRecord成功時
+      async saveCounter() {
+        try {
+          // オーバーレイを表示する
+          this.overlay = true;
+          const result = await gasRun('updateOneRecord',this.counter);
+          // updateOneRecord成功時
           alert('保存しました！');
-        }.bind(this)).catch(function(){
-        // エラー時
+        }
+        catch {
           alert('保存失敗');
-        }).finally(function(){
+        }
+        finally {
           // オーバーレイを非表示に切り替える
           this.overlay = false;
-        }.bind(this));
+        }
       },
     },
   });
