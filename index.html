@@ -15,7 +15,7 @@
           <v-row
             justify="center" align-content="center"
           >
-            <v-col>              
+            <v-col>
               <v-text-field  class="centered-input"
                 solo
                 rounded-xl
@@ -25,7 +25,7 @@
                 v-bind:value="counter"
               ></v-text-field>
               <v-row>
-                <v-col>
+                <v-col v-show="showSwitch">
                   <v-btn
                     @click="addCounter"
                     rounded
@@ -51,9 +51,16 @@
           </v-row>
         </v-container>
       </v-main>
+      <v-overlay :value="overlay">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     </v-app>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>    
 </body>
 </html>
